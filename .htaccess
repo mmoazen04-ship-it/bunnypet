@@ -1,0 +1,53 @@
+Options -Indexes
+  ErrorDocument 404 /index.php
+  <IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header unset X-Powered-By
+  </IfModule>
+  <FilesMatch "^(config\.php|\.env|composer\.json|.*\.sqlite|.*\.log|.*\.md)$">
+  Require all denied
+</FilesMatch>
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+  </IfModule>
+  <IfModule mod_expires.c>
+  ExpiresActive On
+ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType font/woff2 "access plus 1 year"
+  </IfModule>
+  <IfModule mod_rewrite.c>
+  RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule ^maghale/([^/]+)/?$ article.php?slug=$1 [L,QSA]
+  RewriteRule ^mahsool/([^/]+)/?$ product.php?slug=$1 [L,QSA]
+  RewriteRule ^parvande/([^/]+)/?$ animal.php?slug=$1 [L,QSA]
+  RewriteRule ^heyvan/([^/]+)/?$ pet.php?slug=$1 [L,QSA]
+  RewriteRule ^rahnama/([^/]+)/([^/]+)/?$ rahnama.php?pet=$1&b=$2 [L,QSA]
+  RewriteRule ^rahnama/([^/]+)/?$ rahnama.php?pet=$1 [L,QSA]
+  RewriteRule ^sarparasti/?$ adopt.php [L,QSA]
+  RewriteRule ^sarparasti/([^/]+)/?$ adopt.php?pet=$1 [L,QSA]
+  RewriteRule ^majalle/?$ blog.php [L,QSA]
+  RewriteRule ^majalle/mozoo/([^/]+)/?$ blog.php?tag=$1 [L,QSA]
+  RewriteRule ^forooshgah/?$ shop.php [L,QSA]
+  RewriteRule ^forooshgah/daste/([^/]+)/heyvan/([^/]+)/?$ shop.php?cat=$1&pet=$2 [L,QSA]
+  RewriteRule ^forooshgah/daste/([^/]+)/?$ shop.php?cat=$1 [L,QSA]
+  RewriteRule ^forooshgah/heyvan/([^/]+)/?$ shop.php?pet=$1 [L,QSA]
+  RewriteRule ^darbare/?$ about.php [L,QSA]
+  RewriteRule ^porsesh/?$ faq.php [L,QSA]
+  RewriteRule ^tamas/?$ contact.php [L,QSA]
+  RewriteRule ^sabad/?$ cart.php [L,QSA]
+  RewriteRule ^tasviye/?$ checkout.php [L,QSA]
+  RewriteRule ^vorood/?$ login.php [L,QSA]
+  RewriteRule ^sabtenam/?$ register.php [L,QSA]
+  RewriteRule ^hesab/?$ account.php [L,QSA]
+  RewriteRule ^khorooj/?$ logout.php [L,QSA]
+  RewriteRule ^sitemap\.xml$ sitemap.php [L]
+  </IfModule>
