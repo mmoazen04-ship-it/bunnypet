@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /inc/
+Disallow: /data/
+Disallow: /cart.php
+Disallow: /checkout.php
+Disallow: /pay.php
+Disallow: /callback.php
+Disallow: /account.php
+Disallow: /sabad
+Disallow: /tasviye
+Disallow: /hesab
+Disallow: /vorood
+Disallow: /khorooj
+Allow: /
+
+Sitemap: /sitemap.xml
